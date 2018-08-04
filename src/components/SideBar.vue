@@ -5,10 +5,11 @@
     <h2>{{DD}}</h2>
     <div>
       Event
-      <input type="button" value="-">
-      <input type="button" value="+">
+      <input type="button" value="-" :disabled="!anyOneSelected" @click="removeEvent">
+      <input type="button" value="+" @click="addEvent">
       <ul>
-        <li v-for="(item,index) in events" :key="index">{{item.name}}</li>
+        <li v-for="(item,index) in events" :key="item.guid" :class="{selected:item.selected}"
+        @click="setAsSelected(index)">{{item.name}}</li>
       </ul>
     </div>
   </div>
@@ -25,10 +26,25 @@ export default {
       MM: 8,
       WW: 4,
       DD: 3,
-      events: [{ name: "task1" }, { name: "task2" }, { name: "task3" }]
+      events: [
+        { name: "task1", guid: "task1", selected: false },
+        { name: "task2", guid: "task2", selected: false },
+        { name: "task3", guid: "task3", selected: false }
+      ]
     };
   },
   computed: {
+    anyOneSelected: function() {
+      let ret = false;
+      let eList = this.events;
+      for (let i = 0; i < eList.length; i++) {
+        if (eList[i].selected === true) {
+          ret = true;
+          break;
+        }
+      }
+      return ret;
+    },
     MMText: function() {
       let ret;
       const MMList = MMWW.MM;
@@ -40,6 +56,40 @@ export default {
       const WWList = MMWW.WW;
       ret = WWList[this.WW];
       return ret;
+    }
+  },
+  methods: {
+    addEvent: function() {
+      const _name = "task" + (this.events.length + 1);
+      const _guid = this.getGuid();
+      const newEvent = {
+        guid: _guid,
+        name: _name,
+        selected: false
+      };
+
+      this.events.push(newEvent);
+    },
+    removeEvent: function() {
+      let eList = this.events;
+      for (let i = eList.length - 1; i >= 0; i--) {
+        const shouldBeKilled = eList[i].selected === true;
+        if (shouldBeKilled) {
+          this.events.splice(i, 1);
+        }
+      }
+    },
+    setAsSelected: function(i) {
+      this.events[i].selected = !this.events[i].selected;
+    },
+    getGuid: function() {
+      return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function(
+        c
+      ) {
+        var r = (Math.random() * 16) | 0,
+          v = c == "x" ? r : (r & 0x3) | 0x8;
+        return v.toString(16);
+      });
     }
   }
 };
@@ -59,5 +109,8 @@ h2 {
   height: 100vh;
   width: 25%;
   background: #23ce7b;
+}
+.selected {
+  opacity: 0.3;
 }
 </style>
