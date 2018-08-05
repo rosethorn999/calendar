@@ -39,7 +39,7 @@
           <div class="modalFooter">
             <!-- {{pkg.footer}} -->
             <div class="modelButtons">
-            <input type="button" value="OK" class="buttonConfirm" @click="modalEvent(true)">
+            <input type="button" value="OK" class="buttonConfirm" :disabled="columnError" @click="modalEvent(true)">
             <input type="button" value="Cancel" class="buttonCancel" @click="modalEvent(false)">
             </div>
           </div>
@@ -95,6 +95,11 @@ export default {
         type: this.type,
         note: this.note
       });
+    }
+  },
+  computed: {
+    columnError() {
+      return this.title === "";
     }
   },
   mounted() {
@@ -243,6 +248,10 @@ export default {
     }
     .buttonConfirm:hover {
       @include buttonHover;
+    }
+    .buttonConfirm:disabled {
+      color: #ccc;
+      background: #ffffff00;
     }
     .buttonCancel {
       @include buttonCSS;
