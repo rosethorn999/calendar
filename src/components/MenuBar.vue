@@ -5,7 +5,7 @@
   <select>
     <option>Month</option>
   </select>
-  <span>{{YYYY}}</span>
+  <span>{{now.YYYY}}</span>
   <div class="monthSwitcher">
     <div v-for="(item,index) in MMs" :key="index">{{item | firstThree}}</div>
   </div>
@@ -13,14 +13,25 @@
 </template>
 
 <script>
-import MMWW from "../assets/MMWW.json";
+import dateText from "../assets/dateText.json";
 export default {
   name: "MenuBar",
-  props: {},
+  props: {
+    now: {
+      type: Object,
+      default: function() {
+        return {
+          YYYY: 2018,
+          MM: 0,
+          DD: 1,
+          DAY: 0
+        };
+      }
+    }
+  },
   data: function() {
     return {
-      YYYY: 2018,
-      MMs: MMWW.MM
+      MMs: dateText.MM
     };
   },
   filters: {
