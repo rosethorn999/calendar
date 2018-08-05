@@ -1,9 +1,9 @@
 <template>
   <div id="app">    
-    <SideBar :now="nowDate"/>
+    <SideBar :now="nowDate" :events="events" @addEvent="openModal"/>
     <MenuBar :now="nowDate"/>
     <Calendar :now="nowDate"/>
-    <Modal :show="showModal" :pkg="modalPKG"/>
+    <Modal :showModal="showModal" :pkg="modalPKG" @send="modalEvent"/>
   </div>
 </template>
 
@@ -23,7 +23,12 @@ export default {
   },
   data: function() {
     return {
-      showModal: true,
+      events: [
+        { name: "task1", guid: "task1", selected: false },
+        { name: "task2", guid: "task2", selected: false },
+        { name: "task3", guid: "task3", selected: false }
+      ],
+      showModal: false,
       modalPKG: {
         header: "HEADER TEXT",
         body: "BODY TEXT",
@@ -42,6 +47,33 @@ export default {
       };
     }
   },
+  methods: {
+    openModal() {
+      this.showModal = true;
+    },
+    modalEvent(modalDetail) {
+      if (modalDetail.isConfirm) {
+        const _name = modalDetail.title;
+        const _guid = this.getGuid();
+        const newEvent = {
+          guid: _guid,
+          name: _name,
+          selected: false
+        };
+        this.events.push(newEvent);
+      }
+      this.showModal = false;
+    },
+    getGuid: function() {
+      return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function(
+        c
+      ) {
+        var r = (Math.random() * 16) | 0,
+          v = c == "x" ? r : (r & 0x3) | 0x8;
+        return v.toString(16);
+      });
+    }
+  },
   mounted() {}
 };
 </script>
@@ -52,7 +84,7 @@ body {
   padding: 0px;
 }
 #app {
-  font-family: "微軟正黑體","Avenir", Helvetica, Arial, sans-serif;
+  font-family: "微軟正黑體", "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

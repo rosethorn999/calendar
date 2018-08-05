@@ -7,31 +7,31 @@
           <div class="modalBody">
             <div class="modalDate">
               <p>Date:</p>
-              <select class="dateYears">
-                <option>2017</option>
-                <option>2018</option>
-                <option>2019</option>
+              <select class="dateYears" v-model.number="YYYY">>
+                <option :value="2017">2017</option>
+                <option :value="2018">2018</option>
+                <option :value="2019">2019</option>
               </select>
-              <select class="dateMonth">
-                <option v-for="MM in 12" :key="MM">{{MM}}</option>
+              <select class="dateMonth" v-model.number="MM">
+                <option v-for="MM in 12" :key="MM" :value="MM">{{MM}}</option>
               </select>
-              <select class="dateDay">
-                <option v-for="DD in 31" :key="DD">{{DD}}</option>
+              <select class="dateDay" v-model.number="DD">
+                <option v-for="DD in 31" :key="DD" :value="DD">{{DD}}</option>
               </select>
             </div>
             <div class="modalCaption">
               <p>Title:</p>
-              <input type="text">
+              <input type="text" v-model="title">
             </div>
             <div class="modalColorPicker">
               <p>Type:</p>
               <ul>
-                <li v-for="c in colors" :style="{background:'#'+c}" :key="c"></li>              
+                <li v-for="(c,index) in colors" :style="{background:'#'+c}" :key="c" @click="type=index"></li>              
               </ul>
             </div>
             <div class="modalRemarks">
               <p>Note:</p>
-              <input class="modalRemarksBox" type="input">
+              <input class="modalRemarksBox" type="input" v-model="note">
             </div>
             
             <!-- {{pkg.body}} -->
@@ -39,8 +39,8 @@
           <div class="modalFooter">
             <!-- {{pkg.footer}} -->
             <div class="modelButtons">
-            <input type="button" value="OK" class="buttonConfirm">
-            <input type="button" value="Cancel" class="buttonCancel">
+            <input type="button" value="OK" class="buttonConfirm" @click="modalEvent(true)">
+            <input type="button" value="Cancel" class="buttonCancel" @click="modalEvent(false)">
             </div>
           </div>
       </div>
@@ -54,7 +54,7 @@ import colors from "../assets/colors.json";
 export default {
   name: "Modal",
   props: {
-    show: { type: Boolean, dafault: true },
+    showModal: { type: Boolean, dafault: true },
     pkg: {
       type: Object,
       default: function() {
@@ -67,7 +67,38 @@ export default {
     }
   },
   data: function() {
-    return { colors: colors };
+    return {
+      show: false,
+      colors: colors,
+
+      YYYY: 2018,
+      MM: 1,
+      DD: 1,
+      title: "",
+      type: 0,
+      note: ""
+    };
+  },
+  watch: {
+    showModal(v) {
+      this.show = v;
+    }
+  },
+  methods: {
+    modalEvent(isConfirm) {
+      this.$emit("send", {
+        isConfirm: isConfirm,
+        YYYY: this.YYYY,
+        MM: this.MM,
+        DD: this.DD,
+        title: this.title,
+        type: this.type,
+        note: this.note
+      });
+    }
+  },
+  mounted() {
+    this.show = this.showModal;
   }
 };
 </script>
@@ -177,9 +208,8 @@ export default {
   }
   .modalRemarksBox {
     margin-top: 10px;
-    border: 1px solid #666;
     width: 100%;
-    height: 90px;
+    height: 85px;
     text-align: start;
   }
 }

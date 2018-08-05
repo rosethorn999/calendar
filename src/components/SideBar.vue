@@ -21,6 +21,12 @@ import dateText from "../assets/dateText.json";
 export default {
   name: "SideBar",
   props: {
+    events: {
+      type: Array,
+      default: function() {
+        return [];
+      }
+    },
     now: {
       type: Object,
       default: function() {
@@ -34,13 +40,7 @@ export default {
     }
   },
   data: function() {
-    return {
-      events: [
-        { name: "task1", guid: "task1", selected: false },
-        { name: "task2", guid: "task2", selected: false },
-        { name: "task3", guid: "task3", selected: false }
-      ]
-    };
+    return {};
   },
   computed: {
     anyOneSelected: function() {
@@ -71,15 +71,7 @@ export default {
   },
   methods: {
     addEvent: function() {
-      const _name = "task" + (this.events.length + 1);
-      const _guid = this.getGuid();
-      const newEvent = {
-        guid: _guid,
-        name: _name,
-        selected: false
-      };
-
-      this.events.push(newEvent);
+      this.$emit("addEvent");
     },
     removeEvent: function() {
       let eList = this.events;
