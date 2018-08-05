@@ -6,38 +6,31 @@
           </div>
           <div class="modalBody">
             <div class="modalDate">
-              <p>日期:</p>
+              <p>Date:</p>
+              <select>
+                <option>2017</option>
+                <option>2018</option>
+                <option>2019</option>
+              </select>
+              <select>
+                <option v-for="MM in 12" :key="MM">{{MM}}</option>
+              </select>
+              <select>
+                <option v-for="DD in 31" :key="DD">{{DD}}</option>
+              </select>
             </div>
             <div class="modalCaption">
-              <p>標題名稱:</p>
+              <p>Title:</p>
+              <input type="text">
             </div>
             <div class="modalColorPicker">
-              <p>Color Picker:</p>
+              <p>Type:</p>
               <ul>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
+                <li v-for="c in colors" :style="{background:'#'+c}" :key="c"></li>              
               </ul>
             </div>
             <div class="modalRemarks">
-              <p>備註:</p>
+              <p>Note:</p>
               <input class="modalRemarksBox" type="input">
             </div>
             
@@ -46,8 +39,8 @@
           <div class="modalFooter">
             <!-- {{pkg.footer}} -->
             <div class="modelButtons">
-            <input type="button" value="確定" class="buttonConfirm">
-            <input type="button" value="取消" class="buttonCancel">
+            <input type="button" value="OK" class="buttonConfirm">
+            <input type="button" value="Cancel" class="buttonCancel">
             </div>
           </div>
       </div>
@@ -56,6 +49,8 @@
 </template>
 
 <script>
+import colors from "../assets/colors.json";
+
 export default {
   name: "Modal",
   props: {
@@ -72,7 +67,7 @@ export default {
     }
   },
   data: function() {
-    return {};
+    return { colors: colors };
   }
 };
 </script>
