@@ -23,7 +23,7 @@ export default {
   },
   data: function() {
     return {
-      showModal: false,
+      showModal: true,
       modalPKG: {
         header: "HEADER TEXT",
         body: "BODY TEXT",
@@ -40,7 +40,7 @@ body {
   padding: 0px;
 }
 #app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  font-family: "微軟正黑體","Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
