@@ -7,15 +7,15 @@
           <div class="modalBody">
             <div class="modalDate">
               <p>Date:</p>
-              <select>
+              <select class="dateYears">
                 <option>2017</option>
                 <option>2018</option>
                 <option>2019</option>
               </select>
-              <select>
+              <select class="dateMonth">
                 <option v-for="MM in 12" :key="MM">{{MM}}</option>
               </select>
-              <select>
+              <select class="dateDay">
                 <option v-for="DD in 31" :key="DD">{{DD}}</option>
               </select>
             </div>
@@ -116,17 +116,42 @@ export default {
 @mixin modalItemP {
   text-align: end;
   width: 25%;
+  display: inline-block;
 }
+@mixin modalSelect {
+  margin-left: 15px;
+}
+
 .modalDate {
   @include modalItem;
   p {
     @include modalItemP;
+  }
+  select {
+    @include modalSelect;
+  }
+  .dateYears {
+    height: 25px;
+    width: 20%;
+  }
+  .dateMonth {
+    height: 25px;
+    width: 10%;
+  }
+  .dateDay {
+    height: 25px;
+    width: 10%;
   }
 }
 .modalCaption {
   @include modalItem;
   p {
     @include modalItemP;
+  }
+  input {
+    @include modalSelect;
+    width: 60%;
+    height: 25px;
   }
 }
 .modalColorPicker {
