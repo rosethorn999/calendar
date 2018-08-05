@@ -8,9 +8,7 @@
             <div class="modalDate">
               <p>Date:</p>
               <select class="dateYears" v-model.number="YYYY">>
-                <option :value="2017">2017</option>
-                <option :value="2018">2018</option>
-                <option :value="2019">2019</option>
+                <option :value="YYYY" v-for="YYYY in YYYYs" :key="YYYY">{{YYYY}}</option>
               </select>
               <select class="dateMonth" v-model.number="MM">
                 <option v-for="MM in 12" :key="MM" :value="MM">{{MM}}</option>
@@ -71,9 +69,9 @@ export default {
       show: false,
       colors: colors,
 
-      YYYY: 2018,
-      MM: 1,
-      DD: 1,
+      YYYY: null,
+      MM: null,
+      DD: null,
       title: "",
       type: 0,
       note: ""
@@ -95,15 +93,33 @@ export default {
         type: this.type,
         note: this.note
       });
+      this.setDefaultValue();
+    },
+    setDefaultValue() {
+      const d = new Date();
+      this.YYYY = d.getFullYear();
+      this.MM = d.getMonth() + 1;
+      this.DD = d.getDate();
+      this.title = "";
+      this.type = 0;
+      this.note = "";
     }
   },
   computed: {
     columnError() {
       return this.title === "";
+    },
+    YYYYs() {
+      let ret = [];
+      const d = new Date();
+      let nowYYYY = d.getFullYear();
+      ret = [nowYYYY - 2, nowYYYY - 1, nowYYYY, nowYYYY + 1, nowYYYY + 2];
+      return ret;
     }
   },
   mounted() {
     this.show = this.showModal;
+    this.setDefaultValue();
   }
 };
 </script>
