@@ -1,8 +1,8 @@
 <template>
   <div id="app">    
-    <SideBar/>
-    <MenuBar/>
-    <Calendar/>
+    <SideBar :now="nowDate"/>
+    <MenuBar :now="nowDate"/>
+    <Calendar :now="nowDate"/>
     <Modal :show="showModal" :pkg="modalPKG"/>
   </div>
 </template>
@@ -30,7 +30,19 @@ export default {
         footer: "FOOTER TEXT"
       }
     };
-  }
+  },
+  computed: {
+    nowDate() {
+      const d = new Date();
+      return {
+        YYYY: d.getFullYear(),
+        MM: d.getMonth(),
+        DD: d.getDate(),
+        DAY: d.getDay()
+      };
+    }
+  },
+  mounted() {}
 };
 </script>
 

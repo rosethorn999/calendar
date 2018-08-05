@@ -1,8 +1,8 @@
 <template>
   <div class="main">
-    <h2>{{MMText}}</h2>
-    <h2>{{WWText}}</h2>
-    <h2>{{DD}}</h2>
+    <h2>{{now.MM|monthText}}</h2>
+    <h2>{{now.DAY|dayText}}</h2>
+    <h2>{{now.DD}}</h2>
     <div>
       Event
       <input type="button" value="-" :disabled="!anyOneSelected" @click="removeEvent">
@@ -16,16 +16,25 @@
 </template>
 
 <script>
-import MMWW from "../assets/MMWW.json";
+import dateText from "../assets/dateText.json";
 
 export default {
   name: "SideBar",
-  props: {},
+  props: {
+    now: {
+      type: Object,
+      default: function() {
+        return {
+          YYYY: 2018,
+          MM: 0,
+          DD: 1,
+          DAY: 0
+        };
+      }
+    }
+  },
   data: function() {
     return {
-      MM: 8,
-      WW: 4,
-      DD: 3,
       events: [
         { name: "task1", guid: "task1", selected: false },
         { name: "task2", guid: "task2", selected: false },
@@ -44,17 +53,19 @@ export default {
         }
       }
       return ret;
-    },
-    MMText: function() {
+    }
+  },
+  filters: {
+    monthText: function(v) {
       let ret;
-      const MMList = MMWW.MM;
-      ret = MMList[this.MM];
+      const MMList = dateText.MM;
+      ret = MMList[v];
       return ret;
     },
-    WWText: function() {
+    dayText: function(v) {
       let ret;
-      const WWList = MMWW.WW;
-      ret = WWList[this.WW];
+      const MMList = dateText.DAY;
+      ret = MMList[v];
       return ret;
     }
   },

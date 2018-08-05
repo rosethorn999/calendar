@@ -2,24 +2,36 @@
   <div class="main">    
     <table>
       <tr>
-        <th v-for="(week,weekIndex) in WW" :key="weekIndex">{{week|firstThree}}</th>
+        <th v-for="(week,weekIndex) in DAY" :key="weekIndex">{{week|firstThree}}</th>
       </tr>
       <tr v-for="(week,weekIndex) in DDs" :key="weekIndex">
-        <td v-for="(day,dayIndex) in week" :key="dayIndex">{{day}}</td>
+        <td v-for="(date,dayIndex) in week" :key="dayIndex" :class="{nowDate:date===now.DD}"><span>{{date}}</span></td>
       </tr>
     </table>
   </div>
 </template>
 
 <script>
-import MMWW from "../assets/MMWW.json";
+import dateText from "../assets/dateText.json";
 
 export default {
   name: "Calendar",
-  props: {},
+  props: {
+    now: {
+      type: Object,
+      default: function() {
+        return {
+          YYYY: 2018,
+          MM: 0,
+          DD: 1,
+          DAY: 0
+        };
+      }
+    }
+  },
   data: function() {
     return {
-      WW: MMWW.WW
+      DAY: dateText.DAY
     };
   },
   computed: {
@@ -74,5 +86,10 @@ td {
   border-bottom: 1px solid #e0e0e0;
   border-left: 0px;
   width: 14%;
+}
+.nowDate {
+  span {
+    background: #23ce7b;
+  }
 }
 </style>
