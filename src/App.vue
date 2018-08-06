@@ -1,8 +1,8 @@
 <template>
   <div id="app">    
     <SideBar :now="nowDate" :events="events" @addEvent="openModal"/>
-    <MenuBar :now="nowDate"/>
-    <Calendar :now="nowDate"/>
+    <MenuBar :now="nowDate" @MMModify="MMModify" :viewMonth="viewMonth"/>
+    <Calendar :now="nowDate" :viewMonth="viewMonth"/>
     <Modal :showModal="showModal" :pkg="modalPKG" @send="modalEvent"/>
   </div>
 </template>
@@ -23,6 +23,12 @@ export default {
   },
   data: function() {
     return {
+      viewMonth: {
+        YYYY: null,
+        MM: null,
+        DD: null,
+        DAY: null
+      },
       events: [
         { name: "task1", guid: "task1", selected: false },
         { name: "task2", guid: "task2", selected: false },
@@ -64,6 +70,10 @@ export default {
       }
       this.showModal = false;
     },
+    MMModify(goNext) {
+      let v = goNext ? 1 : -1;
+      this.viewMonth.MM += v;
+    },
     getGuid: function() {
       return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function(
         c
@@ -74,7 +84,13 @@ export default {
       });
     }
   },
-  mounted() {}
+  mounted() {
+    const d = new Date();
+    this.viewMonth = {
+      YYYY: d.getFullYear(),
+      MM: d.getMonth()
+    };
+  }
 };
 </script>
 

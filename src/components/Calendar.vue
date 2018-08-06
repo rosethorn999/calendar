@@ -1,12 +1,13 @@
 <template>
-  <div class="main">    
+  <div class="main">
     <table>
       <tr>
         <th v-for="(week,weekIndex) in DAY" :key="weekIndex">{{week|firstThree}}</th>
       </tr>
       <tr v-for="(week,weekIndex) in DDs" :key="weekIndex">
-        <td v-for="(date,dayIndex) in week" :key="dayIndex" :class="{nowDate:date===now.DD}"><span>{{date}}</span></td>
-        <!-- todo<bug>:一個月出現同樣日期會兩個都被加noDate這class -->
+        <td v-for="(date,dayIndex) in week" :key="dayIndex" :class="{nowDate:date===now.DD&&now.MM===viewMonth.MM&&now.YYYY===viewMonth.YYYY}">
+          <span>{{date}}</span>
+        </td>        
       </tr>
     </table>
   </div>
@@ -28,6 +29,15 @@ export default {
           DAY: 0
         };
       }
+    },
+    viewMonth: {
+      type: Object,
+      default: function() {
+        return {
+          YYYY: 2018,
+          MM: 0
+        };
+      }
     }
   },
   data: function() {
@@ -38,7 +48,7 @@ export default {
   computed: {
     DDs() {
       let ret = [];
-      const d = new Date(this.now.YYYY, this.now.MM, 1);
+      const d = new Date(this.viewMonth.YYYY, this.viewMonth.MM, 1);
       const dayOfMonthStart = d.getDay();
       const dateEndOfThisMonth = new Date(
         this.now.YYYY,
