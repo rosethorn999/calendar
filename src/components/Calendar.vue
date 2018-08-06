@@ -6,6 +6,7 @@
       </tr>
       <tr v-for="(week,weekIndex) in DDs" :key="weekIndex">
         <td v-for="(date,dayIndex) in week" :key="dayIndex" :class="{nowDate:date===now.DD}"><span>{{date}}</span></td>
+        <!-- todo<bug>:一個月出現同樣日期會兩個都被加noDate這class -->
       </tr>
     </table>
   </div>
@@ -35,19 +36,52 @@ export default {
     };
   },
   computed: {
-    DDs: () => {
+    DDs() {
       let ret = [];
-      for (let i = 0; i < 5; i++) {
-        ret.push([]);
-        for (let j = 0; j < 7; j++) {
-          ret[i].push(i * 7 + j);
-        }
+      const d = new Date(this.now.YYYY, this.now.MM, 1);
+      const dayOfMonthStart = d.getDay();
+      const dateEndOfThisMonth = new Date(
+        this.now.YYYY,
+        this.now.MM + 1, //todo<bug>:遇到12月會炸裂
+        0
+      ).getDate();
+
+      ret.push([]);
+      let weekCount = 0; //週數
+      //add rest date that before start of this month and need to show in this month.
+      const dateEndOfLastMonth = new Date(
+        this.now.YYYY,
+        this.now.MM - 1, //todo<bug>:遇到1月會炸裂
+        0
+      ).getDate();
+      for (let i = 0; i < dayOfMonthStart; i++) {
+        let v = dateEndOfLastMonth - dayOfMonthStart + i + 1;
+        ret[weekCount].push(v);
       }
+
+      //start date of this month
+      let v = 1;
+      do {
+        ret[weekCount].push(v);
+        if (ret[weekCount].length === 7) {
+          ret.push([]);
+          weekCount += 1;
+        }
+        v += 1;
+      } while (v <= dateEndOfThisMonth);
+
+      //add rest date after end of this month
+      v = 1;
+      do {
+        ret[weekCount].push(v);
+        v += 1;
+      } while (ret[weekCount].length < 7);
+
       return ret;
     }
   },
   filters: {
-    firstThree: function(v) {
+    firstThree(v) {
       return v.substring(0, 3);
     }
   }
