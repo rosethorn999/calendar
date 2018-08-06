@@ -71,8 +71,21 @@ export default {
       this.showModal = false;
     },
     MMModify(goNext) {
-      let v = goNext ? 1 : -1;
-      this.viewMonth.MM += v;
+      if (goNext) {
+        if (this.viewMonth.MM === 11) {
+          this.viewMonth.MM = 0;
+          this.viewMonth.YYYY = this.viewMonth.YYYY + 1;
+        } else {
+          this.viewMonth.MM += 1;
+        }
+      } else {
+        if (this.viewMonth.MM === 0) {
+          this.viewMonth.MM = 11;
+          this.viewMonth.YYYY = this.viewMonth.YYYY - 1;
+        } else {
+          this.viewMonth.MM -= 1;
+        }
+      }
     },
     getGuid: function() {
       return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function(

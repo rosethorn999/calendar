@@ -5,7 +5,7 @@
   <select>
     <option>Month</option>
   </select>
-  <span>{{now.YYYY}}</span>
+  <span>{{viewMonth.YYYY}}</span>
   <div class="monthSwitcher">
     <div v-for="(item,index) in MMs" :key="index" :class="{selected:index===viewMonth.MM}">{{item | firstThree}}</div>
   </div>
