@@ -11,7 +11,7 @@
                 <option :value="YYYY" v-for="YYYY in YYYYs" :key="YYYY">{{YYYY}}</option>
               </select>
               <select class="dateMonth" v-model.number="MM">
-                <option v-for="MM in 12" :key="MM" :value="MM">{{MM}}</option>
+                <option v-for="MM in 12" :key="MM" :value="MM-1">{{MM}}</option>
               </select>
               <select class="dateDay" v-model.number="DD">
                 <option v-for="DD in 31" :key="DD" :value="DD">{{DD}}</option>
@@ -98,7 +98,7 @@ export default {
     setDefaultValue() {
       const d = new Date();
       this.YYYY = d.getFullYear();
-      this.MM = d.getMonth() + 1;
+      this.MM = d.getMonth();
       this.DD = d.getDate();
       this.title = "";
       this.type = 0;
