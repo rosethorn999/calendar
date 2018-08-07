@@ -62,6 +62,17 @@ export default {
           footer: "fff"
         };
       }
+    },
+    viewDate: {
+      type: Object,
+      default: function() {
+        return {
+          YYYY: 2018,
+          MM: 0,
+          DD: 0,
+          DAY: 0
+        };
+      }
     }
   },
   data: function() {
@@ -80,6 +91,9 @@ export default {
   watch: {
     showModal(v) {
       this.show = v;
+    },
+    viewDate(v) {
+      this.setDefaultValue();
     }
   },
   methods: {
@@ -97,9 +111,21 @@ export default {
     },
     setDefaultValue() {
       const d = new Date();
-      this.YYYY = d.getFullYear();
-      this.MM = d.getMonth();
-      this.DD = d.getDate();
+      let YYYY = d.getFullYear();
+      let MM = d.getMonth();
+      let DD = d.getDate();
+      if (
+        this.viewDate.YYYY !== null &&
+        this.viewDate.MM !== null &&
+        this.viewDate.DD !== null
+      ) {
+        YYYY = this.viewDate.YYYY;
+        MM = this.viewDate.MM;
+        DD = this.viewDate.DD;
+      }
+      this.YYYY = YYYY;
+      this.MM = MM;
+      this.DD = DD;
       this.title = "";
       this.type = 0;
       this.note = "";

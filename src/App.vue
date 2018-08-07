@@ -6,7 +6,7 @@
       @MMModify="MMModify" />
     <Calendar :now="nowDate" :viewDate="viewDate" :events="events"
       @changeSelectedDate="changeSelectedDate"/>
-    <Modal :showModal="showModal" :pkg="modalPKG"
+    <Modal :showModal="showModal" :pkg="modalPKG" :viewDate="selectedViewDate"
       @send="modalEvent"/>
   </div>
 </template>
