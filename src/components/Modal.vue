@@ -42,7 +42,7 @@
             </div>
           </div>
       </div>
-      <div class="modalBG"></div>
+      <div class="modalBG" @click="modalEvent(false)"></div>
   </div>  
 </template>
 
