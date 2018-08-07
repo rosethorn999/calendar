@@ -5,9 +5,9 @@
   <select>
     <option>Month</option>
   </select>
-  <span>{{viewMonth.YYYY}}</span>
+  <span>{{viewDate.YYYY}}</span>
   <div class="monthSwitcher">
-    <div v-for="(item,index) in MMs" :key="index" :class="{selected:index===viewMonth.MM}">{{item | firstThree}}</div>
+    <div v-for="(item,index) in MMs" :key="index" :class="{selected:index===viewDate.MM}">{{item | firstThree}}</div>
   </div>
   </div>
 </template>
@@ -28,7 +28,7 @@ export default {
         };
       }
     },
-    viewMonth: {
+    viewDate: {
       type: Object,
       default: function() {
         return {

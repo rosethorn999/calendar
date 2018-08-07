@@ -1,8 +1,8 @@
 <template>
   <div id="app">    
-    <SideBar :now="nowDate" :events="events" @addEvent="openModal"/>
-    <MenuBar :now="nowDate" @MMModify="MMModify" :viewMonth="viewMonth"/>
-    <Calendar :now="nowDate" :viewMonth="viewMonth"/>
+    <SideBar :now="nowDate" :events="events" :viewDate="viewDate" @addEvent="openModal"/>
+    <MenuBar :now="nowDate" :viewDate="viewDate" @MMModify="MMModify" />
+    <Calendar :now="nowDate" :viewDate="viewDate"/>
     <Modal :showModal="showModal" :pkg="modalPKG" @send="modalEvent"/>
   </div>
 </template>
@@ -23,7 +23,7 @@ export default {
   },
   data: function() {
     return {
-      viewMonth: {
+      viewDate: {
         YYYY: null,
         MM: null,
         DD: null,
@@ -72,18 +72,18 @@ export default {
     },
     MMModify(goNext) {
       if (goNext) {
-        if (this.viewMonth.MM === 11) {
-          this.viewMonth.MM = 0;
-          this.viewMonth.YYYY = this.viewMonth.YYYY + 1;
+        if (this.viewDate.MM === 11) {
+          this.viewDate.MM = 0;
+          this.viewDate.YYYY = this.viewDate.YYYY + 1;
         } else {
-          this.viewMonth.MM += 1;
+          this.viewDate.MM += 1;
         }
       } else {
-        if (this.viewMonth.MM === 0) {
-          this.viewMonth.MM = 11;
-          this.viewMonth.YYYY = this.viewMonth.YYYY - 1;
+        if (this.viewDate.MM === 0) {
+          this.viewDate.MM = 11;
+          this.viewDate.YYYY = this.viewDate.YYYY - 1;
         } else {
-          this.viewMonth.MM -= 1;
+          this.viewDate.MM -= 1;
         }
       }
     },
@@ -99,9 +99,11 @@ export default {
   },
   mounted() {
     const d = new Date();
-    this.viewMonth = {
+    this.viewDate = {
       YYYY: d.getFullYear(),
-      MM: d.getMonth()
+      MM: d.getMonth(),
+      DD: d.getDate(),
+      DAY: d.getDay()
     };
   }
 };

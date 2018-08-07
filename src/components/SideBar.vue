@@ -1,8 +1,8 @@
 <template>
   <div class="main">
-    <h2>{{now.MM|monthText}}</h2>
-    <h2>{{now.DAY|dayText}}</h2>
-    <h2>{{now.DD}}</h2>
+    <h2>{{viewDate.MM|monthText}}</h2>
+    <h2>{{viewDate.DAY|dayText}}</h2>
+    <h2>{{viewDate.DD}}</h2>
     <div>
       Event
       <input type="button" value="-" :disabled="!anyOneSelected" @click="removeEvent">
@@ -35,6 +35,16 @@ export default {
           MM: 0,
           DD: 1,
           DAY: 0
+        };
+      }
+    },
+    viewDate: {
+      type: Object,
+      default: function() {
+        return {
+          YYYY: 2018,
+          MM: 0,
+          DD: 0
         };
       }
     }
