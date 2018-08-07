@@ -106,7 +106,8 @@ export default {
       }
     },
     setAsSelected: function(i) {
-      this.events[this.YYYYMMDD][i].selected = !this.events[i].selected;
+      this.events[this.YYYYMMDD][i].selected = !this.events[this.YYYYMMDD][i]
+        .selected;
     },
     getGuid: function() {
       return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function(
