@@ -8,7 +8,7 @@
       <input type="button" value="-" :disabled="!anyOneSelected" @click="removeEvent">
       <input type="button" value="+" @click="addEvent">
       <ul>
-        <li v-for="(item,index) in events" :key="item.guid" :class="{selected:item.selected}"
+        <li v-for="(item,index) in events[YYYYMMDD]" :key="item.guid" :class="{selected:item.selected}"
         @click="setAsSelected(index)">{{item.name}}</li>
       </ul>
     </div>
@@ -22,9 +22,9 @@ export default {
   name: "SideBar",
   props: {
     events: {
-      type: Array,
+      type: Object,
       default: function() {
-        return [];
+        return {};
       }
     },
     now: {
@@ -44,7 +44,8 @@ export default {
         return {
           YYYY: 2018,
           MM: 0,
-          DD: 0
+          DD: 0,
+          DAY: 0
         };
       }
     }
@@ -53,15 +54,27 @@ export default {
     return {};
   },
   computed: {
+    YYYYMMDD() {
+      return (
+        this.viewDate.YYYY +
+        ("0" + (this.viewDate.MM + 1)).slice(-2) +
+        ("0" + this.viewDate.DD).slice(-2)
+      );
+    },
     anyOneSelected: function() {
       let ret = false;
-      let eList = this.events;
-      for (let i = 0; i < eList.length; i++) {
-        if (eList[i].selected === true) {
-          ret = true;
-          break;
+
+      let eList = this.events[this.YYYYMMDD];
+      if (eList) {
+        //avoid this.YYYYMMDD has not been calculated
+        for (let i = 0; i < eList.length; i++) {
+          if (eList[i].selected === true) {
+            ret = true;
+            break;
+          }
         }
       }
+
       return ret;
     }
   },
@@ -84,16 +97,16 @@ export default {
       this.$emit("addEvent");
     },
     removeEvent: function() {
-      let eList = this.events;
+      let eList = this.events[this.YYYYMMDD];
       for (let i = eList.length - 1; i >= 0; i--) {
         const shouldBeKilled = eList[i].selected === true;
         if (shouldBeKilled) {
-          this.events.splice(i, 1);
+          this.events[this.YYYYMMDD].splice(i, 1);
         }
       }
     },
     setAsSelected: function(i) {
-      this.events[i].selected = !this.events[i].selected;
+      this.events[this.YYYYMMDD][i].selected = !this.events[i].selected;
     },
     getGuid: function() {
       return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function(

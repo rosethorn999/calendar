@@ -1,9 +1,13 @@
 <template>
   <div id="app">    
-    <SideBar :now="nowDate" :events="events" :viewDate="viewDate" @addEvent="openModal"/>
-    <MenuBar :now="nowDate" :viewDate="viewDate" @MMModify="MMModify" />
-    <Calendar :now="nowDate" :viewDate="viewDate"/>
-    <Modal :showModal="showModal" :pkg="modalPKG" @send="modalEvent"/>
+    <SideBar :now="nowDate" :events="events" :viewDate="selectedViewDate"
+      @addEvent="openModal"/>
+    <MenuBar :now="nowDate" :viewDate="viewDate"
+      @MMModify="MMModify" />
+    <Calendar :now="nowDate" :viewDate="viewDate" :events="events"
+      @changeSelectedDate="changeSelectedDate"/>
+    <Modal :showModal="showModal" :pkg="modalPKG"
+      @send="modalEvent"/>
   </div>
 </template>
 
@@ -23,17 +27,41 @@ export default {
   },
   data: function() {
     return {
+      selectedViewDate: {
+        YYYY: null,
+        MM: null,
+        DD: null,
+        DAY: null
+      },
       viewDate: {
         YYYY: null,
         MM: null,
         DD: null,
         DAY: null
       },
-      events: [
-        { name: "task1", guid: "task1", selected: false },
-        { name: "task2", guid: "task2", selected: false },
-        { name: "task3", guid: "task3", selected: false }
-      ],
+      events: {
+        "20180729": [
+          { name: "task1", guid: "task1", selected: false },
+          { name: "task2", guid: "task2", selected: false }
+        ],
+        "20180807": [
+          { name: "task1", guid: "task1", selected: false },
+          { name: "task2", guid: "task2", selected: false },
+          { name: "task3", guid: "task3", selected: false }
+        ],
+        "20180808": [
+          { name: "task1", guid: "task1", selected: false },
+          { name: "task2", guid: "task2", selected: false }
+        ],
+        "20180901": [
+          { name: "task1", guid: "task1", selected: false },
+          { name: "task2", guid: "task2", selected: false }
+        ],
+        "20180908": [
+          { name: "task1", guid: "task1", selected: false },
+          { name: "task2", guid: "task2", selected: false }
+        ]
+      },
       showModal: false,
       modalPKG: {
         header: "HEADER TEXT",
@@ -66,7 +94,7 @@ export default {
           name: _name,
           selected: false
         };
-        this.events.push(newEvent);
+        this.events["YYYYMMDD"].push(newEvent);
       }
       this.showModal = false;
     },
@@ -87,6 +115,9 @@ export default {
         }
       }
     },
+    changeSelectedDate(dataObj) {
+      this.selectedViewDate = dataObj;
+    },
     getGuid: function() {
       return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function(
         c
@@ -100,6 +131,12 @@ export default {
   mounted() {
     const d = new Date();
     this.viewDate = {
+      YYYY: d.getFullYear(),
+      MM: d.getMonth(),
+      DD: d.getDate(),
+      DAY: d.getDay()
+    };
+    this.selectedViewDate = {
       YYYY: d.getFullYear(),
       MM: d.getMonth(),
       DD: d.getDate(),
