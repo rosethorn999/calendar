@@ -1,12 +1,16 @@
 <template>
   <div class="main">
-    <h2>{{viewDate.MM|monthText}}</h2>
-    <h2>{{viewDate.DAY|dayText}}</h2>
-    <h2>{{viewDate.DD}}</h2>
-    <div>
-      Event
-      <input type="button" value="-" :disabled="!anyOneSelected" @click="removeEvent">
-      <input type="button" value="+" @click="addEvent">
+    <div class="dateDisplay">
+      <h2>{{viewDate.MM|monthText}}</h2>
+      <h2>{{viewDate.DAY|dayText}}</h2>
+      <h2>{{viewDate.DD}}</h2>
+    </div>
+    <div class="eventArea">
+      <h3>Event</h3>
+      <div class="eventButtonArea">
+        <input type="button" value="-" :disabled="!anyOneSelected" @click="removeEvent" class="buttonLess">
+        <input type="button" value="+" @click="addEvent" class="buttonAdd">
+      </div>
       <ul>
         <li v-for="(item,index) in events[YYYYMMDD]" :key="item.guid" :class="{selected:item.selected}"
         @click="setAsSelected(index)">{{item.name}}</li>
@@ -127,16 +131,54 @@ export default {
 * {
   margin: 0px;
 }
-h2 {
-  text-align: center;
-}
 .main {
   color: #fff;
   float: left;
   height: 100vh;
-  width: 25%;
+  width: 22.5%;
   background: #23ce7b;
 }
+.dateDisplay {
+  margin-top: 30px;
+  h2 {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 2em;
+  }
+  h2:last-child {
+    font-size: 4em;
+  }
+}
+.eventArea {
+  box-sizing: border-box;
+  padding: 10%;
+  h3 {
+    float: left;
+  }
+  .eventButtonArea {
+    float: right;
+    @mixin buttonCSS {
+      border: none;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      margin-left: 10px;
+      font-size: 26px;
+      line-height: 26px;
+      color: #23ce7b;
+      font-weight: bold;
+    }
+    .buttonLess {
+      background: red;
+      @include buttonCSS;
+    }
+    .buttonAdd {
+      background: white;
+      @include buttonCSS;
+    }
+  }
+}
+
 .selected {
   opacity: 0.3;
 }
