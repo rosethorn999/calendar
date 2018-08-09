@@ -99,7 +99,7 @@ export default {
           ("0" + (modalDetail.MM + 1)).slice(-2) + //need+1; because:"20180808"={YYYY:2018,MM:7,DD:8}
           ("0" + modalDetail.DD).slice(-2);
         if (!this.events.hasOwnProperty(YYYYMMDD)) {
-          this.events[YYYYMMDD] = [];
+          this.$set(this.events, YYYYMMDD, []);
         }
         this.events[YYYYMMDD].push(newEvent);
       }
