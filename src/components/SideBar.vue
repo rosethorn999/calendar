@@ -11,7 +11,7 @@
         <input type="button" value="-" :disabled="!anyOneSelected" @click="removeEvent" class="buttonLess">
         <input type="button" value="+" @click="addEvent" class="buttonAdd">
       </div>
-      <ul>
+      <ul class="eventItemArea">
         <li v-for="(item,index) in events[YYYYMMDD]" :key="item.guid" :class="{selected:item.selected}"
         @click="setAsSelected(index)">{{item.name}}</li>
       </ul>
@@ -130,6 +130,7 @@ export default {
 <style scoped lang="scss">
 * {
   margin: 0px;
+  list-style: none;
 }
 .main {
   color: #fff;
@@ -151,9 +152,9 @@ export default {
 }
 .eventArea {
   box-sizing: border-box;
-  padding: 10%;
+  padding: 10% 15%;
   h3 {
-    float: left;
+    display: inline-block;
   }
   .eventButtonArea {
     float: right;
@@ -175,6 +176,16 @@ export default {
     .buttonAdd {
       background: white;
       @include buttonCSS;
+    }
+  }
+  .eventItemArea {
+    margin-top: 10%;
+    li {
+      margin-top: 3%;
+      border-radius: 5px;
+      padding: 3px 15px;
+      text-align: end;
+      background: #000000;
     }
   }
 }
