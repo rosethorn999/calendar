@@ -41,25 +41,42 @@ export default {
       },
       events: {
         "20180729": [
-          { name: "task1", guid: "task1", selected: false },
-          { name: "task2", guid: "task2", selected: false }
+          { name: "task1", guid: "task1", type: 0, selected: false },
+          { name: "task2", guid: "task2", type: 1, selected: false }
         ],
         "20180807": [
-          { name: "task1", guid: "task1", selected: false },
-          { name: "task2", guid: "task2", selected: false },
-          { name: "task3", guid: "task3", selected: false }
+          { name: "task0", guid: "task0", type: 0, selected: false },
+          { name: "task1", guid: "task1", type: 1, selected: false },
+          { name: "task2", guid: "task2", type: 2, selected: false },
+          { name: "task3", guid: "task3", type: 3, selected: false },
+          { name: "task4", guid: "task4", type: 4, selected: false },
+          { name: "task5", guid: "task5", type: 5, selected: false },
+          { name: "task6", guid: "task6", type: 6, selected: false },
+          { name: "task7", guid: "task7", type: 7, selected: false },
+          { name: "task8", guid: "task8", type: 8, selected: false },
+          { name: "task9", guid: "task9", type: 9, selected: false },
+          { name: "task10", guid: "task10", type: 10, selected: false },
+          { name: "task11", guid: "task11", type: 11, selected: false },
+          { name: "task12", guid: "task12", type: 12, selected: false },
+          { name: "task13", guid: "task13", type: 13, selected: false },
+          { name: "task14", guid: "task14", type: 14, selected: false },
+          { name: "task15", guid: "task15", type: 15, selected: false },
+          { name: "task16", guid: "task16", type: 16, selected: false },
+          { name: "task17", guid: "task17", type: 17, selected: false },
+          { name: "task18", guid: "task18", type: 18, selected: false },
+          { name: "task19", guid: "task19", type: 19, selected: false }
         ],
         "20180808": [
-          { name: "task1", guid: "task1", selected: false },
-          { name: "task2", guid: "task2", selected: false }
+          { name: "task1", guid: "task1", type: 0, selected: false },
+          { name: "task2", guid: "task2", type: 1, selected: false }
         ],
         "20180901": [
-          { name: "task1", guid: "task1", selected: false },
-          { name: "task2", guid: "task2", selected: false }
+          { name: "task1", guid: "task1", type: 0, selected: false },
+          { name: "task2", guid: "task2", type: 1, selected: false }
         ],
         "20180908": [
-          { name: "task1", guid: "task1", selected: false },
-          { name: "task2", guid: "task2", selected: false }
+          { name: "task1", guid: "task1", type: 0, selected: false },
+          { name: "task2", guid: "task2", type: 1, selected: false }
         ]
       },
       showModal: false,
@@ -88,10 +105,12 @@ export default {
     modalEvent(modalDetail) {
       if (modalDetail.isConfirm) {
         const _name = modalDetail.title;
+        const _type = modalDetail.type;
         const _guid = this.getGuid();
         const newEvent = {
           guid: _guid,
           name: _name,
+          type: _type,
           selected: false
         };
         const YYYYMMDD =

@@ -12,7 +12,7 @@
         <input type="button" value="+" @click="addEvent" class="buttonAdd">
       </div>
       <ul class="eventItemArea">
-        <li v-for="(item,index) in events[YYYYMMDD]" :key="item.guid" :class="{selected:item.selected}"
+        <li v-for="(item,index) in events[YYYYMMDD]" :key="item.guid" :class="{selected:item.selected}" :style="{'background':'#'+colors[item.type]}"
         @click="setAsSelected(index)">{{item.name}}</li>
       </ul>
     </div>
@@ -20,6 +20,7 @@
 </template>
 
 <script>
+import colors from "../assets/colors.json";
 import dateText from "../assets/dateText.json";
 
 export default {
@@ -55,7 +56,9 @@ export default {
     }
   },
   data: function() {
-    return {};
+    return {
+      colors: colors
+    };
   },
   computed: {
     YYYYMMDD() {
