@@ -131,10 +131,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-* {
-  margin: 0px;
-  list-style: none;
-}
 .main {
   color: #fff;
   float: left;
@@ -144,6 +140,7 @@ export default {
 }
 .dateDisplay {
   margin-top: 30px;
+  height: calc(30vh - 30px);
   h2 {
     text-align: center;
     margin-top: 10px;
@@ -156,6 +153,8 @@ export default {
 .eventArea {
   box-sizing: border-box;
   padding: 10% 15%;
+  height: 70vh;
+  overflow: auto;
   h3 {
     display: inline-block;
   }

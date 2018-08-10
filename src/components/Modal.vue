@@ -24,7 +24,7 @@
             <div class="modalColorPicker">
               <p>Type:</p>
               <ul>
-                <li v-for="(c,index) in colors" :style="{background:'#'+c}" :key="c" @click="type=index"></li>              
+                <li v-for="(c,index) in colors" :style="{background:'#'+c}" :class="{selected:index===type}" :key="c" @click="type=index"></li>              
               </ul>
             </div>
             <div class="modalRemarks">
@@ -152,10 +152,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-* {
-  margin: 0px;
-  padding: 0px;
-}
 .main {
   width: 100%;
   height: 100%;
@@ -246,6 +242,9 @@ export default {
     display: inline-block;
     margin: 3.5px;
     margin-top: 15px;
+  }
+  li.selected {
+    border: 2px solid #000;
   }
 }
 .modalRemarks {

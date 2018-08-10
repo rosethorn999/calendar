@@ -184,6 +184,11 @@ export default {
 </script>
 
 <style lang="scss">
+* {
+  margin: 0px;
+  list-style: none;
+  padding: 0px;
+}
 body {
   margin: 0px;
   padding: 0px;

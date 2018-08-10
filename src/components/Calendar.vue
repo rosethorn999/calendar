@@ -10,10 +10,11 @@
           :class="{nowDate:date.DD===now.DD&&now.MM===viewDate.MM&&now.YYYY===viewDate.YYYY,notThisMontth:date.MM!==viewDate.MM}"
           @click="changeSelectedDate(date)">
           <span>{{date.DD}}</span>
-          <ul>
-            <li v-for="(item,index) in getEventByDate(date)" :key="item.guid" :class="{selected:item.selected}"
+          <ul class="eventItemArea">
+            <li v-for="(item,index) in getEventByDate(date)" v-if="index<5" :key="item.guid" :class="{selected:item.selected}" :style="{'background':'#'+colors[item.type]}"
               @mouseover="showInfo(index)">{{item.name}}</li>
           </ul>
+          <span v-if="getEventByDate(date).length>5">More</span>
         </td>
       </tr>
     </table>
@@ -21,6 +22,7 @@
 </template>
 
 <script>
+import colors from "../assets/colors.json";
 import dateText from "../assets/dateText.json";
 
 export default {
@@ -56,6 +58,7 @@ export default {
   },
   data: function() {
     return {
+      colors: colors,
       DAY: dateText.DAY
     };
   },
@@ -126,11 +129,13 @@ export default {
   },
   methods: {
     getEventByDate(dateObj) {
+      let ret = [];
       const YYYYMMDD =
         dateObj.YYYY +
         ("0" + (dateObj.MM + 1)).slice(-2) + //need+1; because:"20180808"={YYYY:2018,MM:7,DD:8}
         ("0" + dateObj.DD).slice(-2);
-      return this.events[YYYYMMDD];
+      ret = this.events[YYYYMMDD] || [];
+      return ret;
     },
     showInfo() {},
     changeSelectedDate(dateObj) {
@@ -142,9 +147,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-* {
-  margin: 0px;
-}
 .main {
   float: left;
   height: 85vh;
@@ -179,6 +181,16 @@ td.notThisMontth {
 .nowDate {
   span {
     background: #23ce7b;
+  }
+}
+.eventItemArea {
+  margin-top: 10%;
+  li {
+    margin-top: 3%;
+    border-radius: 5px;
+    padding: 3px 15px;
+    text-align: end;
+    background: steelblue;
   }
 }
 </style>
