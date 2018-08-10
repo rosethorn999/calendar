@@ -142,6 +142,17 @@ export default {
       }
     },
     changeSelectedDate(dataObj) {
+      const YYYYMMDD =
+        this.selectedViewDate.YYYY +
+        ("0" + (this.selectedViewDate.MM + 1)).slice(-2) + //need+1; because:"20180808"={YYYY:2018,MM:7,DD:8}
+        ("0" + this.selectedViewDate.DD).slice(-2);
+      if (this.events[YYYYMMDD]) {
+        for (let i = 0; i < this.events[YYYYMMDD].length; i++) {
+          if (this.events[YYYYMMDD][i].selected === true) {
+            this.events[YYYYMMDD][i].selected = false;
+          }
+        }
+      }
       this.selectedViewDate = dataObj;
     },
     getGuid: function() {
