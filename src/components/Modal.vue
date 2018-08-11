@@ -73,11 +73,22 @@ export default {
           DAY: 0
         };
       }
+    },
+    viewEvent: {
+      type: Object,
+      default: function() {
+        return {
+          title: "",
+          type: 0,
+          note: ""
+        };
+      }
     }
   },
   data: function() {
     return {
       show: false,
+      modalType: "add",
       colors: colors,
 
       YYYY: null,
@@ -94,12 +105,17 @@ export default {
     },
     viewDate(v) {
       this.setDefaultValue();
+    },
+    viewEvent(v) {
+      this.setDefaultValue();
     }
   },
   methods: {
     modalEvent(isConfirm) {
       this.$emit("send", {
         isConfirm: isConfirm,
+        eventType: this.modalType,
+        guid: this.guid,
         YYYY: this.YYYY,
         MM: this.MM,
         DD: this.DD,
@@ -110,10 +126,15 @@ export default {
       this.setDefaultValue();
     },
     setDefaultValue() {
+      this.modalType = "add";
       const d = new Date();
       let YYYY = d.getFullYear();
       let MM = d.getMonth();
       let DD = d.getDate();
+      let guid = this.getGuid();
+      let title = "";
+      let type = 0;
+      let note = "";
       if (
         this.viewDate.YYYY !== null &&
         this.viewDate.MM !== null &&
@@ -123,12 +144,35 @@ export default {
         MM = this.viewDate.MM;
         DD = this.viewDate.DD;
       }
+      if (
+        this.viewEvent.guid !== null &&
+        this.viewEvent.title !== null &&
+        this.viewEvent.type !== null &&
+        this.viewEvent.note !== null
+      ) {
+        this.modalType = "edit";
+        guid = this.viewEvent.guid;
+        title = this.viewEvent.title;
+        type = this.viewEvent.type;
+        note = this.viewEvent.note;
+      }
+
       this.YYYY = YYYY;
       this.MM = MM;
       this.DD = DD;
-      this.title = "";
-      this.type = 0;
-      this.note = "";
+      this.guid = guid;
+      this.title = title;
+      this.type = type;
+      this.note = note;
+    },
+    getGuid: function() {
+      return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function(
+        c
+      ) {
+        var r = (Math.random() * 16) | 0,
+          v = c == "x" ? r : (r & 0x3) | 0x8;
+        return v.toString(16);
+      });
     }
   },
   computed: {

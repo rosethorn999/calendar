@@ -13,7 +13,8 @@
       </div>
       <ul class="eventItemArea">
         <li v-for="(item,index) in events[YYYYMMDD]" :key="item.guid" :class="{selected:item.selected}" :style="{'background':'#'+colors[item.type]}"
-        @click="setAsSelected(index)">{{item.name}}</li>
+          @click="setAsSelected(index)">{{item.title}}
+        </li>
       </ul>
     </div>
   </div>
@@ -57,7 +58,9 @@ export default {
   },
   data: function() {
     return {
-      colors: colors
+      colors: colors,
+      clicks: 0,
+      clickTimer: null
     };
   },
   computed: {
@@ -113,8 +116,21 @@ export default {
       }
     },
     setAsSelected: function(i) {
-      this.events[this.YYYYMMDD][i].selected = !this.events[this.YYYYMMDD][i]
-        .selected;
+      this.clicks++;
+      if (this.clicks === 1) {
+        this.clickTimer = setTimeout(() => {
+          this.events[this.YYYYMMDD][i].selected = !this.events[this.YYYYMMDD][
+            i
+          ].selected;
+          console.log("single");
+          this.clicks = 0;
+        }, 200);
+      } else {
+        clearTimeout(this.clickTimer);
+        console.log("db");
+        this.$emit("editEvent", this.events[this.YYYYMMDD][i]);
+        this.clicks = 0;
+      }
     },
     getGuid: function() {
       return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function(
