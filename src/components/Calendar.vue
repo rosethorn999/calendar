@@ -1,20 +1,28 @@
 <template>
   <div class="main">
-    <table>
+    <table class="days">
       <tr>
         <th v-for="(week,weekIndex) in DAY" :key="weekIndex">{{week|firstThree}}</th>
       </tr>
-
-      <tr v-for="(week,weekIndex) in DDs" :key="weekIndex">
+    </table>
+    <table class="dates">
+      <tr v-for="(week,weekIndex) in DDs" :key="weekIndex" class="dateTR">
         <td v-for="(date,dayIndex) in week" :key="dayIndex"
-          :class="{nowDate:date.DD===now.DD&&now.MM===viewDate.MM&&now.YYYY===viewDate.YYYY,notThisMontth:date.MM!==viewDate.MM}"
+          :class="{nowDate:date.DD===now.DD&&now.MM===viewDate.MM&&now.YYYY===viewDate.YYYY , notThisMontth:date.MM!==viewDate.MM}"
           @click="changeSelectedDate(date)">
-          <span>{{date.DD}}</span>
-          <ul class="eventItemArea">
-            <li v-for="(item,index) in getEventByDate(date)" v-if="index<5" :key="item.guid" :class="{selected:item.selected}" :style="{'background':'#'+colors[item.type]}"
-              @mouseover="showInfo(index)">{{item.name}}</li>
-          </ul>
-          <span v-if="getEventByDate(date).length>5">More</span>
+          <div>
+            <span>{{date.DD}}</span>
+          </div>
+          <div class="eventContainer">
+            <ul class="eventItemArea">
+              <li v-for="(item,index) in getEventByDate(date)" v-if="index<=maxContainIndex" :key="item.guid" :class="{selected:item.selected}" :style="{'background':'#'+colors[item.type]}">
+                {{item.name}}
+              </li>
+            </ul>
+          </div>
+          <div>
+            <span v-if="getEventByDate(date).length>maxContainIndex">More</span>
+          </div>
         </td>
       </tr>
     </table>
@@ -58,6 +66,8 @@ export default {
   },
   data: function() {
     return {
+      interval: null,
+      maxContainIndex: 99,
       colors: colors,
       DAY: dateText.DAY
     };
@@ -122,6 +132,11 @@ export default {
       return ret;
     }
   },
+  watch: {
+    viewDate() {
+      this.calcEventHeight();
+    }
+  },
   filters: {
     firstThree(v) {
       return v.substring(0, 3);
@@ -140,6 +155,20 @@ export default {
     showInfo() {},
     changeSelectedDate(dateObj) {
       this.$emit("changeSelectedDate", dateObj);
+    },
+    calcEventHeight() {
+      if (this.interval) {
+        clearInterval(this.interval);
+      }
+      this.interval = setInterval(() => {
+        let container = document.querySelector(".eventContainer");
+        let event = document.querySelector(".eventItemArea>li");
+        if (container && event) {
+          this.maxContainIndex =
+            container.offsetHeight / event.offsetHeight - 1;
+          clearInterval(this.interval);
+        }
+      }, 250);
     }
   }
 };
@@ -156,41 +185,60 @@ table {
   table-layout: fixed;
   border-collapse: collapse;
   width: 100%;
-  height: 100%;
-}
-th {
-  height: 20px;
-  border-top: 0px;
-  border-right: 1px solid #e0e0e0;
-  border-left: 0px;
-}
-tr {
-  padding: 0px;
-}
-td {
-  padding: 0px;
-  border-top: 0px;
-  border-right: 1px solid #e0e0e0;
-  border-bottom: 1px solid #e0e0e0;
-  border-left: 0px;
-  width: 14%;
-}
-td.notThisMontth {
-  opacity: 0.3;
-}
-.nowDate {
-  span {
-    background: #23ce7b;
+  &.days {
+    height: 5%;
   }
-}
-.eventItemArea {
-  margin-top: 10%;
-  li {
-    margin-top: 3%;
-    border-radius: 5px;
-    padding: 3px 15px;
-    text-align: end;
-    background: steelblue;
+  &.dates {
+    height: 95%;
+  }
+  th {
+    border-top: 0px;
+    border-right: 1px solid #e0e0e0;
+    border-left: 0px;
+  }
+  tr {
+    vertical-align: top;
+    max-height: 20%;
+  }
+  td {
+    border-top: 0px;
+    border-right: 1px solid #e0e0e0;
+    border-bottom: 1px solid #e0e0e0;
+    border-left: 0px;
+    width: 14%;
+  }
+  .nowDate {
+    span {
+      background: #23ce7b;
+    }
+  }
+  td.notThisMontth {
+    opacity: 0.3;
+  }
+  td > div:first {
+    height: 20px;
+  }
+  td > div:nth-child(2) {
+    overflow: hidden;
+    height: calc(100% - 42px);
+  }
+  td > div:last-child {
+    height: 20px;
+    text-align: center;
+    color: #a4a4a4;
+    font-size: 0.8em;
+  }
+
+  .eventItemArea {
+    display: block;
+    margin-top: 2%;
+    height: 40px;
+    li {
+      font-size: 0.8em;
+      border-radius: 5px;
+      padding: 0px 15px;
+      text-align: end;
+    }
   }
 }
 </style>
