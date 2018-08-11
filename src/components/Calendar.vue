@@ -179,7 +179,7 @@ export default {
 .main {
   float: left;
   height: 85vh;
-  width: 75%;
+  width: 77%;
 }
 table {
   table-layout: fixed;
@@ -205,7 +205,6 @@ table {
     border-right: 1px solid #e0e0e0;
     border-bottom: 1px solid #e0e0e0;
     border-left: 0px;
-    width: 14%;
   }
   .nowDate {
     span {
