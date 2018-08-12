@@ -2,6 +2,9 @@
   <div class="main">
   <button @click="MMModify(false)" class="buttonLeft"><i class="fas fa-chevron-left"></i></button>
   <button @click="MMModify(true)" class="buttonRight"><i class="fas fa-chevron-right"></i></button>
+  <div class="todayDate">
+    <p>Today</p>
+  </div>
   <select class="optionDate">
     <option>Month</option>
   </select>
@@ -76,10 +79,21 @@ export default {
     margin: 1% 2%;
     cursor: pointer;
   }
+  .todayDate {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 1.5% 275px;
+    border: 1px solid #23ce7b;
+    padding: 5px;
+    p {
+      color: #23ce7b;
+    }
+  }
   .optionDate {
     position: absolute;
     right: 0;
-    margin: 2.5% 150px;
+    margin: 2% 150px;
   }
   .displayYear {
     font-size: 2.5em;

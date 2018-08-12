@@ -244,6 +244,7 @@ table {
     }
     .doneEvnet {
       text-decoration: line-through;
+      color: white;
     }
   }
 }

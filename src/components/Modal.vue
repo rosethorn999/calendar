@@ -239,7 +239,7 @@ export default {
 }
 @mixin modalItemP {
   text-align: end;
-  width: 25%;
+  width: 15%;
   display: inline-block;
 }
 @mixin modalSelect {
@@ -256,15 +256,15 @@ export default {
   }
   .dateYears {
     height: 25px;
-    width: 20%;
+    width: 25%;
   }
   .dateMonth {
     height: 25px;
-    width: 10%;
+    width: 15%;
   }
   .dateDay {
     height: 25px;
-    width: 10%;
+    width: 15%;
   }
 }
 .modalCaption {
@@ -274,7 +274,7 @@ export default {
   }
   input {
     @include modalSelect;
-    width: 60%;
+    width: 75%;
     height: 25px;
   }
 }
