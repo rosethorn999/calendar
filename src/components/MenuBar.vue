@@ -65,7 +65,7 @@ export default {
   box-sizing: border-box;
   float: left;
   height: 15vh;
-  width: 77%;
+  width: 77.5%;
   border-bottom: 1px solid #23ce7b;
   position: relative;
   .buttonLeft,
