@@ -8,7 +8,7 @@
     <div class="eventArea">
       <h3>Event</h3>
       <div class="eventButtonArea">
-        <span class="buttonCheck">
+        <span @click="doneEvent" class="buttonCheck" :class="{disabled:!anyOneSelected}">
           <i class="fas fa-check"></i>
         </span>
         <span @click="removeEvent" class="buttonLess" :class="{disabled:!anyOneSelected}">
@@ -21,7 +21,7 @@
       <ul class="eventItemArea">
         <li v-for="(item,index) in events[YYYYMMDD]" :key="item.guid" :class="{selected:item.selected}" :style="{'background':'#'+colors[item.type]}"
           @click="setAsSelected(index)">
-          <i class="fas fa-check"></i>
+            <i class="fas fa-check" v-if="item.done"></i>
             <abbr :title="item.note">{{item.title}}</abbr>
         </li>
       </ul>
@@ -112,6 +112,15 @@ export default {
     }
   },
   methods: {
+    doneEvent: function() {
+      let eList = this.events[this.YYYYMMDD];
+      for (let i = 0; i < eList.length; i++) {
+        if (eList[i].selected) {
+          eList[i].done = !eList[i].done;
+          eList[i].selected = false;
+        }
+      }
+    },
     addEvent: function() {
       this.$emit("addEvent");
     },
@@ -218,7 +227,7 @@ export default {
       padding: 3px 15px;
       text-align: end;
       background: #000000;
-      i{
+      i {
         float: left;
       }
     }

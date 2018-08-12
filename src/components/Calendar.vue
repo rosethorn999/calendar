@@ -16,7 +16,7 @@
           <div class="eventContainer">
             <ul class="eventItemArea">
               <li v-for="(item,index) in getEventByDate(date)"
-                v-if="index<=maxContainIndex" :key="item.guid" :class="{selected:item.selected}" :style="{'background':'#'+colors[item.type]}">
+                v-if="index<=maxContainIndex" :key="item.guid" :class="{doneEvnet:item.done}" :style="{'background':'#'+colors[item.type]}">
                 <abbr :title="item.note">{{item.title}}</abbr>
               </li>
             </ul>
@@ -149,7 +149,6 @@ export default {
       ret = this.events[YYYYMMDD] || [];
       return ret;
     },
-    showInfo() {},
     changeSelectedDate(dateObj) {
       this.$emit("changeSelectedDate", dateObj);
     },
@@ -242,6 +241,9 @@ table {
       border-radius: 5px;
       padding: 0px 15px;
       text-align: end;
+    }
+    .doneEvnet {
+      text-decoration: line-through;
     }
   }
 }

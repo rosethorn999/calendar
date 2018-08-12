@@ -80,7 +80,8 @@ export default {
         return {
           title: "",
           type: 0,
-          note: ""
+          note: "",
+          done: false
         };
       }
     }
@@ -96,7 +97,8 @@ export default {
       DD: null,
       title: "",
       type: 0,
-      note: ""
+      note: "",
+      done: false
     };
   },
   watch: {
@@ -121,7 +123,8 @@ export default {
         DD: this.DD,
         title: this.title,
         type: this.type,
-        note: this.note
+        note: this.note,
+        done: this.done
       });
       this.setDefaultValue();
     },
@@ -135,6 +138,7 @@ export default {
       let title = "";
       let type = 0;
       let note = "";
+      let done = false;
       if (
         this.viewDate.YYYY !== null &&
         this.viewDate.MM !== null &&
@@ -155,6 +159,7 @@ export default {
         title = this.viewEvent.title;
         type = this.viewEvent.type;
         note = this.viewEvent.note;
+        done = this.viewEvent.done;
       }
 
       this.YYYY = YYYY;
@@ -164,6 +169,7 @@ export default {
       this.title = title;
       this.type = type;
       this.note = note;
+      this.done = done;
     },
     getGuid: function() {
       return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function(

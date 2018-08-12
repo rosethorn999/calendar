@@ -80,11 +80,13 @@ export default {
         const _type = modalDetail.type;
         const _guid = modalDetail.guid;
         const _note = modalDetail.note;
+        const _done = modalDetail.done;
         const eventInfo = {
           guid: _guid,
           title: _title,
           type: _type,
           note: _note,
+          done: _done,
           selected: false
         };
         const YYYYMMDD =
