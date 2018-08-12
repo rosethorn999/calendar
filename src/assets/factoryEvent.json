@@ -1,40 +1,40 @@
 {
   "20180729": [
     {
-      "title": "task1",
-      "guid": "task1",
+      "title": "Upload proposal",
+      "guid": "5ef98697-e3e6-4292-9b4f-5833038c1ccf",
       "type": 0,
-      "note": "",
+      "note": "part 1",
       "selected": false
     },
     {
-      "title": "task2",
-      "guid": "task2",
+      "title": "Buy milk",
+      "guid": "3cb77692-0dc5-4a35-9fa6-b45a14402ff9",
       "type": 1,
-      "note": "",
+      "note": "Grandpa need some vitamin and calcium",
       "selected": false
     }
   ],
   "20180807": [
     {
-      "title": "task0",
-      "guid": "task0",
+      "title": "Upload proposal",
+      "guid": "578a9180-d3b9-4cff-9a81-7d64959f1a0e",
       "type": 0,
-      "note": "",
+      "note": "part 2",
       "selected": false
     },
     {
-      "title": "task1",
-      "guid": "task1",
+      "title": "Buy orange",
+      "guid": "17ebfc4f-2532-49e2-8758-b02774420b5f",
       "type": 1,
-      "note": "",
+      "note": "Big sale at WMT only today!",
       "selected": false
     },
     {
-      "title": "task2",
+      "title": "Dennis's Birthday",
       "guid": "task2",
       "type": 2,
-      "note": "task2;type2",
+      "note": "Big party at backyard",
       "selected": false
     },
     {
@@ -159,49 +159,49 @@
   ],
   "20180808": [
     {
-      "title": "task1",
-      "guid": "task1",
-      "type": 0,
-      "note": "",
+      "title": "Renew member",
+      "guid": "4378f966-7e8f-468e-94cc-99266ddb8f57",
+      "type": 6,
+      "note": "The Gym near office. Call Jimmy get discount.",
       "selected": false
     },
     {
-      "title": "task2",
-      "guid": "task2",
+      "title": "Buy Fish",
+      "guid": "fa491d48-414b-4278-89d7-06f69160c60a",
       "type": 1,
-      "note": "",
+      "note": "Use cuppon:iLoveFish to get $30 discount.",
       "selected": false
     }
   ],
   "20180901": [
     {
-      "title": "task1",
-      "guid": "task1",
+      "title": "Upload proposal",
+      "guid": "1022e778-eef3-4ea3-a1f1-b227cc5f37f6",
       "type": 0,
-      "note": "",
+      "note": "part 3",
       "selected": false
     },
     {
-      "title": "task2",
-      "guid": "task2",
-      "type": 1,
+      "title": "Change tires",
+      "guid": "b369cbf4-b8ed-4b02-9876-f2210e4e74b4",
+      "type": 3,
       "note": "",
       "selected": false
     }
   ],
   "20180908": [
     {
-      "title": "task1",
-      "guid": "task1",
+      "title": "Proposal deadline",
+      "guid": "2db588ac-f11c-4c4d-995b-6a96636534de",
       "type": 0,
-      "note": "",
+      "note": "Sent a copy to Sam.",
       "selected": false
     },
     {
-      "title": "task2",
-      "guid": "task2",
+      "title": "Buy apple",
+      "guid": "4fb5a9e1-6f87-4290-bad9-ee3ffc0e3676",
       "type": 1,
-      "note": "",
+      "note": "Buy one get one free this week in AMZN online-shop.",
       "selected": false
     }
   ]

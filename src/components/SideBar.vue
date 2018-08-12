@@ -20,7 +20,8 @@
       </div>
       <ul class="eventItemArea">
         <li v-for="(item,index) in events[YYYYMMDD]" :key="item.guid" :class="{selected:item.selected}" :style="{'background':'#'+colors[item.type]}"
-          @click="setAsSelected(index)">{{item.title}}
+          @click="setAsSelected(index)">
+            <abbr :title="item.note">{{item.title}}</abbr>
         </li>
       </ul>
     </div>

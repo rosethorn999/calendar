@@ -15,8 +15,9 @@
           </div>
           <div class="eventContainer">
             <ul class="eventItemArea">
-              <li v-for="(item,index) in getEventByDate(date)" v-if="index<=maxContainIndex" :key="item.guid" :class="{selected:item.selected}" :style="{'background':'#'+colors[item.type]}">
-                {{item.title}}
+              <li v-for="(item,index) in getEventByDate(date)"
+                v-if="index<=maxContainIndex" :key="item.guid" :class="{selected:item.selected}" :style="{'background':'#'+colors[item.type]}">
+                <abbr :title="item.note">{{item.title}}</abbr>
               </li>
             </ul>
           </div>
