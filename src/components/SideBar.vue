@@ -8,8 +8,15 @@
     <div class="eventArea">
       <h3>Event</h3>
       <div class="eventButtonArea">
-        <input type="button" value="-" :disabled="!anyOneSelected" @click="removeEvent" class="buttonLess">
-        <input type="button" value="+" @click="addEvent" class="buttonAdd">
+        <span class="buttonCheck">
+          <i class="fas fa-check"></i>
+        </span>
+        <span :disabled="!anyOneSelected" @click="removeEvent" class="buttonLess">
+          <i class="fas fa-minus-circle"></i>
+        </span>
+        <span @click="addEvent" class="buttonAdd">
+          <i class="fas fa-plus-circle"></i>
+        </span>
       </div>
       <ul class="eventItemArea">
         <li v-for="(item,index) in events[YYYYMMDD]" :key="item.guid" :class="{selected:item.selected}" :style="{'background':'#'+colors[item.type]}"
@@ -170,34 +177,34 @@ export default {
   box-sizing: border-box;
   padding: 10% 15%;
   height: 70vh;
-  overflow: auto;
   h3 {
     display: inline-block;
   }
   .eventButtonArea {
     float: right;
     @mixin buttonCSS {
-      border: none;
-      width: 30px;
-      height: 30px;
       border-radius: 50%;
       margin-left: 10px;
       font-size: 26px;
-      line-height: 26px;
-      color: #23ce7b;
       font-weight: bold;
     }
+    .buttonCheck {
+      color: #f9ee00;
+      @include buttonCSS;
+    }
     .buttonLess {
-      background: red;
+      color: red;
       @include buttonCSS;
     }
     .buttonAdd {
-      background: white;
+      color: white;
       @include buttonCSS;
     }
   }
   .eventItemArea {
     margin-top: 10%;
+    height: 90%;
+    overflow: auto;
     li {
       margin-top: 3%;
       border-radius: 5px;

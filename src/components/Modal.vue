@@ -299,7 +299,7 @@ export default {
   .modalRemarksBox {
     margin-top: 10px;
     width: 100%;
-    height: 85px;
+    height: 80px;
     text-align: start;
   }
 }

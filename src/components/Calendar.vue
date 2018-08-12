@@ -179,7 +179,7 @@ export default {
 .main {
   float: left;
   height: 85vh;
-  width: 77%;
+  width: 77.5%;
 }
 table {
   table-layout: fixed;
@@ -206,9 +206,17 @@ table {
     border-bottom: 1px solid #e0e0e0;
     border-left: 0px;
   }
+  .dateTR {
+    td span {
+      margin: 5px;
+    }
+  }
   .nowDate {
     span {
       background: #23ce7b;
+      padding: 2px;
+      border-radius: 50%;
+      color: white;
     }
   }
   td.notThisMontth {
