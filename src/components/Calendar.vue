@@ -80,7 +80,7 @@ export default {
         const dayOfMonthStart = d.getDay();
         const d_ofThisMonth = new Date(
           this.viewDate.YYYY,
-          this.viewDate.MM + 1, //todo<bug>:遇到12月會炸裂
+          this.viewDate.MM + 1,
           0
         );
         const DDDD_ofThisMonth = d_ofThisMonth.getDate();
@@ -88,11 +88,7 @@ export default {
         ret.push([]);
         let weekCount = 0; //週數
         //add rest date that before start of this month and need to show in this month.
-        const d_ofLastMonth = new Date(
-          this.viewDate.YYYY,
-          this.viewDate.MM, //todo<bug>:遇到1月會炸裂
-          0
-        );
+        const d_ofLastMonth = new Date(this.viewDate.YYYY, this.viewDate.MM, 0);
         const DDDD_ofLastMonth = d_ofLastMonth.getDate();
         for (let i = 0; i < dayOfMonthStart; i++) {
           let YYYY = d_ofLastMonth.getFullYear();

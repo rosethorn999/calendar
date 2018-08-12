@@ -74,6 +74,7 @@ export default {
     background: transparent;
     font-size: 2.2em;
     margin: 1% 2%;
+    cursor: pointer;
   }
   .optionDate {
     position: absolute;

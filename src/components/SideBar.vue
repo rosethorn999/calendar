@@ -11,7 +11,7 @@
         <span class="buttonCheck">
           <i class="fas fa-check"></i>
         </span>
-        <span :disabled="!anyOneSelected" @click="removeEvent" class="buttonLess">
+        <span @click="removeEvent" class="buttonLess" :class="{disabled:!anyOneSelected}">
           <i class="fas fa-minus-circle"></i>
         </span>
         <span @click="addEvent" class="buttonAdd">
@@ -183,6 +183,7 @@ export default {
   .eventButtonArea {
     float: right;
     @mixin buttonCSS {
+      cursor: pointer;
       border-radius: 50%;
       margin-left: 10px;
       font-size: 26px;
@@ -199,6 +200,10 @@ export default {
     .buttonAdd {
       color: white;
       @include buttonCSS;
+    }
+    .disabled {
+      opacity: 0.3;
+      cursor: no-drop;
     }
   }
   .eventItemArea {
