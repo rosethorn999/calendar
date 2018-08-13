@@ -3,7 +3,7 @@
     <SideBar :now="nowDate" :events="events" :viewDate="selectedViewDate"
       @addEvent="addModal" @editEvent="editModal"/>
     <MenuBar :now="nowDate" :viewDate="viewDate"
-      @MMModify="MMModify" />
+      @MMModify="MMModify" @gotoThisMonth="gotoThisMonth"/>
     <Calendar :now="nowDate" :viewDate="viewDate" :events="events"
       @changeSelectedDate="changeSelectedDate"/>
     <Modal :showModal="showModal" :pkg="modalPKG" :viewDate="selectedViewDate" :viewEvent="selectedViewEvent"
@@ -109,6 +109,11 @@ export default {
         }
       }
       this.showModal = false;
+    },
+    gotoThisMonth() {
+      this.viewDate.YYYY = this.nowDate.YYYY;
+      this.viewDate.MM = this.nowDate.MM;
+      this.viewDate.DD = this.nowDate.DD;
     },
     MMModify(goNext) {
       if (goNext) {

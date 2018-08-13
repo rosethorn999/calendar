@@ -2,7 +2,7 @@
   <div class="main">
   <button @click="MMModify(false)" class="buttonLeft"><i class="fas fa-chevron-left"></i></button>
   <button @click="MMModify(true)" class="buttonRight"><i class="fas fa-chevron-right"></i></button>
-  <div class="todayDate">
+  <div class="todayDate" @click="gotoThisMonth">
     <p>Today</p>
   </div>
   <select class="optionDate">
@@ -52,6 +52,9 @@ export default {
     }
   },
   methods: {
+    gotoThisMonth() {
+      this.$emit("gotoThisMonth");
+    },
     MMModify(goNext) {
       this.$emit("MMModify", goNext);
     }
@@ -80,6 +83,7 @@ export default {
     cursor: pointer;
   }
   .todayDate {
+    cursor: pointer;
     position: absolute;
     top: 0;
     right: 0;
