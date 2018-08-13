@@ -237,13 +237,13 @@ table {
     margin-top: 2%;
     height: 40px;
     li {
+      color: white;
       font-size: 0.8em;
       border-radius: 5px;
       padding: 0px 15px;
       text-align: end;
-      .doneEvnet {
+      &.doneEvnet {
         text-decoration: line-through;
-        color: white;
       }
     }
   }
