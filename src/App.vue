@@ -114,6 +114,12 @@ export default {
       this.viewDate.YYYY = this.nowDate.YYYY;
       this.viewDate.MM = this.nowDate.MM;
       this.viewDate.DD = this.nowDate.DD;
+      this.viewDate.DAY = this.nowDate.DAY;
+
+      this.selectedViewDate.YYYY = this.nowDate.YYYY;
+      this.selectedViewDate.MM = this.nowDate.MM;
+      this.selectedViewDate.DD = this.nowDate.DD;
+      this.selectedViewDate.DAY = this.nowDate.DD;
     },
     MMModify(goNext) {
       if (goNext) {
