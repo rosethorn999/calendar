@@ -241,10 +241,10 @@ table {
       border-radius: 5px;
       padding: 0px 15px;
       text-align: end;
-    }
-    .doneEvnet {
-      text-decoration: line-through;
-      color: white;
+      .doneEvnet {
+        text-decoration: line-through;
+        color: white;
+      }
     }
   }
 }
