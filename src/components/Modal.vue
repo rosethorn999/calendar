@@ -105,10 +105,10 @@ export default {
     showModal(v) {
       this.show = v;
     },
-    viewDate(v) {
+    viewDate() {
       this.setDefaultValue();
     },
-    viewEvent(v) {
+    viewEvent() {
       this.setDefaultValue();
     }
   },

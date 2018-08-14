@@ -140,12 +140,10 @@ export default {
           this.events[this.YYYYMMDD][i].selected = !this.events[this.YYYYMMDD][
             i
           ].selected;
-          console.log("single");
           this.clicks = 0;
         }, 200);
       } else {
         clearTimeout(this.clickTimer);
-        console.log("db");
         this.$emit("editEvent", this.events[this.YYYYMMDD][i]);
         this.clicks = 0;
       }
