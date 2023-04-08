@@ -1,11 +1,11 @@
 # calendar
 
-# Preview:
+## Preview:
 
-- ![previewGif](https://raw.githubusercontent.com/rosethorn999/calendar/master/previewDesktop.gif)
-- [Demo](https://rosethorn999.github.io/projects/calendar)
+[demo](https://rosethorn999.github.io/calendar/)
+![previewGif](https://raw.githubusercontent.com/rosethorn999/calendar/master/previewDesktop.gif)
 
-# Feature:
+## Feature:
 
 - Add / Remove / Edit event directly
 - Simple way to back today
@@ -14,7 +14,7 @@
 - detect date / month / year automatically
 - Defensive UI/UX
 
-# Usage:
+## Usage:
 
 1.  Clone repository https://github.com/rosethorn999/calendar.git
     ```
@@ -33,10 +33,10 @@
     http://localhost:8080
     ```
 
-# Skill:
+## Skill:
 
 - Vue.js
 - Webpack
 - SCSS
 
-# Reference:
+## Reference:
